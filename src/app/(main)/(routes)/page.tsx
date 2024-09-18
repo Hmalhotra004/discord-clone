@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
 
 const Home = () => {
   return (
     <div>
-      <p className="text-indigo-500">hello world</p>
-      <Button>Click me</Button>
+      <UserButton afterSignOutUrl="/" />
     </div>
   );
 };
