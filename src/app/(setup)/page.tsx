@@ -1,9 +1,20 @@
+import InitialModal from "@/components/models/initial-modal";
 import { db } from "@/lib/db";
 import initialProfile from "@/lib/initial-profile";
 import { redirect } from "next/navigation";
 
+type Profile = {
+  id: string;
+  userId: string;
+  name: string;
+  imageUrl: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 const SetupPage = async () => {
-  const profile = await initialProfile();
+  const profile = (await initialProfile()) as Profile;
 
   const server = await db.server.findFirst({
     where: {
@@ -19,7 +30,7 @@ const SetupPage = async () => {
     return redirect(`/servers/${server.id}`);
   }
 
-  return <div>create a server</div>;
+  return <InitialModal />;
 };
 
 export default SetupPage;
