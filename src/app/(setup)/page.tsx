@@ -1,6 +1,6 @@
-import InitialModal from "@/components/models/initial-modal";
+import InitialModal from "@/components/models/InitialModal";
 import { db } from "@/lib/db";
-import initialProfile from "@/lib/initial-profile";
+import initialProfile from "@/lib/initialProfile";
 import { redirect } from "next/navigation";
 
 type Profile = {
