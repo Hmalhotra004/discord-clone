@@ -14,7 +14,8 @@ const ServerIdlayout = async ({ children, params }: Props) => {
 
   if (!profile) return RedirectToSignIn;
 
-  const server = await db.server.findUnique({
+  //TODO: fixme findUniuqe
+  const server = await db.server.findFirst({
     where: {
       id: params.serverId,
       members: {

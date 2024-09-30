@@ -13,7 +13,8 @@ export const ServerSidebar = async ({ serverId }: Props) => {
 
   if (!profile) return redirect("/");
 
-  const server = await db.server.findUnique({
+  //TODO: fixme findUniuqe
+  const server = await db.server.findFirst({
     where: {
       id: serverId,
     },
