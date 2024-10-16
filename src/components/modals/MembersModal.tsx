@@ -100,16 +100,22 @@ const MembersModal = () => {
                         <DropdownMenuSub>
                           <DropdownMenuSubTrigger className="flex items-center">
                             <ShieldQuestion className="w-4 h-4 mr-2" />
-                            <span>role</span>
+                            <span className="cursor-pointer">role</span>
                           </DropdownMenuSubTrigger>
                           <DropdownMenuPortal>
                             <DropdownMenuSubContent>
-                              <DropdownMenuItem onClick={() => onRoleChange(member.id, "GUEST")}>
+                              <DropdownMenuItem
+                                onClick={() => onRoleChange(member.id, "GUEST")}
+                                className="cursor-pointer"
+                              >
                                 <Shield className="w-4 h-4 mr-2" />
                                 Guest
                                 {member.role === "GUEST" && <Check className="w-4 h-4 ml-auto" />}
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => onRoleChange(member.id, "MODERATOR")}>
+                              <DropdownMenuItem
+                                onClick={() => onRoleChange(member.id, "MODERATOR")}
+                                className="cursor-pointer"
+                              >
                                 <ShieldCheck className="w-4 h-4 mr-2" />
                                 Moderator
                                 {member.role === "MODERATOR" && <Check className="w-4 h-4 ml-2" />}
@@ -119,7 +125,7 @@ const MembersModal = () => {
                         </DropdownMenuSub>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          className="text-red-500"
+                          className="text-red-500 cursor-pointer"
                           onClick={() => onKick(member.id)}
                         >
                           <Gavel className="w-4 h-4 mr-2" />
