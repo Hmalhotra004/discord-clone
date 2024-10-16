@@ -1,6 +1,7 @@
 "use client";
 
 import CreateServerModal from "@/components/modals/CreateServerModal";
+import EditServerModal from "@/components/modals/EditServerModal";
 import InviteModal from "@/components/modals/InviteModal";
 import { useEffect, useState } from "react";
 
@@ -19,6 +20,7 @@ const ModalProvider = () => {
     <>
       <CreateServerModal />
       <InviteModal />
+      <EditServerModal />
     </>
   );
 };
