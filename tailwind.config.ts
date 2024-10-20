@@ -6,7 +6,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "discord-col": "#5865f2",
+        ebony: "#313338",
+        discord: "#5865f2",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
