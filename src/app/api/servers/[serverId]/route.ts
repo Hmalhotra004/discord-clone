@@ -18,7 +18,7 @@ export async function DELETE(req: Request, { params }: { params: { serverId: str
     return NextResponse.json(server);
   } catch (err) {
     console.log("[SERVER_ID_DELETE]", err);
-    return new NextResponse("Internal Error", { status: 50 });
+    return new NextResponse("Internal Error", { status: 500 });
   }
 }
 
@@ -44,6 +44,6 @@ export async function PATCH(req: Request, { params }: { params: { serverId: stri
     return NextResponse.json(server);
   } catch (err) {
     console.log("[SERVER_ID_PATCH]", err);
-    return new NextResponse("Internal Error", { status: 50 });
+    return new NextResponse("Internal Error", { status: 500 });
   }
 }
