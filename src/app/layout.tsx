@@ -1,4 +1,5 @@
 import ModalProvider from "@/components/providers/ModalProvider";
+import QueryProvider from "@/components/providers/QueryProvider";
 import SocketProvider from "@/components/providers/SocketProvider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { cn } from "@/lib/utils";
@@ -27,19 +28,17 @@ export default function RootLayout({
     <ClerkProvider>
       <html
         lang="en"
-        suppressHydrationWarning
-      >
+        suppressHydrationWarning>
         <body className={cn(font, `bg-white dark:bg-[#313338]`)}>
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem={false}
             storageKey="discord-theme"
-            disableTransitionOnChange
-          >
+            disableTransitionOnChange>
             <SocketProvider>
               <ModalProvider />
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>
         </body>
