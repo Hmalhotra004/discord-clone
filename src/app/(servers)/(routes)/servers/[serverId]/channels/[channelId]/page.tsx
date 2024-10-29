@@ -1,6 +1,7 @@
 import ChatHeader from "@/components/chat/ChatHeader";
 import ChatInput from "@/components/chat/ChatInput";
 import ChatMessages from "@/components/chat/ChatMessages";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import currentProfile from "@/lib/currentProfile";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
@@ -41,31 +42,35 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
         serverId={channel.serverId}
         type="channel"
       />
-      <div className="flex-1 flex">
-        <ChatMessages
-          member={member}
+      <ScrollArea>
+        <div className="flex-1 flex">
+          <ChatMessages
+            member={member}
+            name={channel.name}
+            type="channel"
+            apiUrl="/api/messages"
+            socketUrl="/api/socket/messages"
+            socketQuery={{
+              channelId: channel.id,
+              serverId: channel.serverId,
+            }}
+            paramKey="channelId"
+            paramValue={channel.id}
+            chatId={channel.id}
+          />
+        </div>
+      </ScrollArea>
+      <div className="mt-auto">
+        <ChatInput
+          apiUrl="/api/socket/messages"
           name={channel.name}
           type="channel"
-          apiUrl="/api/messages"
-          socketUrl="/api/socket/messages"
-          socketQuery={{
+          query={{
             channelId: channel.id,
             serverId: channel.serverId,
           }}
-          paramKey="channelId"
-          paramValue={channel.id}
-          chatId={channel.id}
         />
       </div>
-      <ChatInput
-        apiUrl="/api/socket/messages"
-        name={channel.name}
-        type="channel"
-        query={{
-          channelId: channel.id,
-          serverId: channel.serverId,
-        }}
-      />
     </div>
   );
 };

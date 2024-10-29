@@ -39,7 +39,7 @@ const FileUpload = ({ onChange, value, endpoint }: Props) => {
         <a
           href={value}
           target="_blank"
-          // rel="noopener noreferrer"
+          rel="noopener noreferrer"
           className="ml-2 text-sm text-indigo-500 dark:text-indigo-400 hover:underline"
         >
           {value}
@@ -58,7 +58,7 @@ const FileUpload = ({ onChange, value, endpoint }: Props) => {
   return (
     <UploadDropzone
       endpoint={endpoint}
-      onClientUploadComplete={res => {
+      onClientUploadComplete={(res) => {
         onChange(res?.[0].url);
       }}
       onUploadError={(err: Error) => {

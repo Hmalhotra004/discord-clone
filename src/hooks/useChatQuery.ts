@@ -31,17 +31,24 @@ const useChatQuery = ({
       { skipNull: true }
     );
     const res = await fetch(url);
+    if (!res.ok) throw new Error("Failed to fetch messages");
     return res.json();
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useInfiniteQuery({
-      queryKey: [queryKey],
-      queryFn: fetchMessages,
-      getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      refetchInterval: isConnected ? false : 1000,
-      initialPageParam: isConnected ? undefined : null,
-    });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+    isLoading,
+  } = useInfiniteQuery({
+    queryFn: fetchMessages,
+    queryKey: [queryKey],
+    getNextPageParam: (lastPage) => lastPage?.nextCursor,
+    refetchInterval: isConnected ? false : 1000,
+    initialPageParam: isConnected ? undefined : null,
+  });
 
   return {
     data,
@@ -49,6 +56,7 @@ const useChatQuery = ({
     hasNextPage,
     isFetchingNextPage,
     status,
+    isLoading,
   };
 };
 
