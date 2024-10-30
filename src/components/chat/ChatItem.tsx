@@ -7,8 +7,9 @@ import ActionTooltip from "@/components/ActionTooltip";
 import UserAvatar from "@/components/UserAvatar";
 import useModal from "@/hooks/useModal";
 import { cn } from "@/lib/utils";
+import { MemberWithProfile } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Member, MemberRole, Profile } from "@prisma/client";
+import { MemberRole } from "@prisma/client";
 import axios from "axios";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import Image from "next/image";
@@ -21,13 +22,11 @@ import * as z from "zod";
 interface ChatItemProps {
   id: string;
   content: string;
-  member: Member & {
-    profile: Profile;
-  };
+  member: MemberWithProfile;
   timestamp: string;
   fileUrl: string | null;
   deleted: boolean;
-  currentMember: Member;
+  currentMember: MemberWithProfile;
   isUpdated: boolean;
   socketUrl: string;
   socketQuery: Record<string, string>;

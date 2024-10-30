@@ -13,6 +13,10 @@ export type MessageWithMemberWithProfile = Message & {
   };
 };
 
+export type MemberWithProfile = Member & {
+  profile: Profile;
+};
+
 //socket io
 export type NextApiResponseServerIo = NextApiResponse & {
   socket: Socket & {
