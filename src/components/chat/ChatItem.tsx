@@ -1,8 +1,10 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
+import ActionTooltip from "@/components/ActionTooltip";
+import UserAvatar from "@/components/UserAvatar";
 import useModal from "@/hooks/useModal";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,12 +12,11 @@ import { Member, MemberRole, Profile } from "@prisma/client";
 import axios from "axios";
 import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 import qs from "query-string";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import ActionTooltip from "../ActionTooltip";
-import UserAvatar from "../UserAvatar";
 
 interface ChatItemProps {
   id: string;
@@ -57,6 +58,14 @@ const ChatItem = ({
   const [isEditing, setIsEditing] = useState(false);
   const { onOpen } = useModal();
   const fileType = fileUrl?.split(".").pop();
+  const params = useParams();
+  const router = useRouter();
+
+  function onMemberClick() {
+    if (member.id === currentMember.id) return;
+
+    router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
+  }
 
   const isAdmin = currentMember.role === MemberRole.ADMIN;
   const isModerator = currentMember.role === MemberRole.MODERATOR;
@@ -113,13 +122,19 @@ const ChatItem = ({
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
       <div className="group flex gap-x-2 items-start w-full">
-        <div className="cursor-pointer hover:drop-shadow-md transition">
+        <div
+          onClick={onMemberClick}
+          className="cursor-pointer hover:drop-shadow-md transition"
+        >
           <UserAvatar src={member.profile.imageUrl} />
         </div>
         <div className="flex flex-col w-full">
           <div className="flex items-center gap-x-2">
             <div className="flex items-center">
-              <p className="font-semibold text-sm hover:underline cursor-pointer">
+              <p
+                className="font-semibold text-sm hover:underline cursor-pointer"
+                onClick={onMemberClick}
+              >
                 {member.profile.name}
               </p>
               <ActionTooltip label={member.role}>

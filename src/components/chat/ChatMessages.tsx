@@ -1,5 +1,6 @@
 "use client";
 
+import { useChatSocket } from "@/hooks/useChatSocket";
 import { Member } from "@prisma/client";
 import { format } from "date-fns";
 import { Loader2, ServerCrash } from "lucide-react";
@@ -35,6 +36,8 @@ const ChatMessages = ({
   type,
 }: ChatMessgesProps) => {
   const queryKey = `chat:${chatId}`;
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
   const {
     data,
     fetchNextPage,
@@ -48,6 +51,8 @@ const ChatMessages = ({
     paramKey,
     paramValue,
   });
+
+  useChatSocket({ queryKey, addKey, updateKey });
 
   if (isLoading) {
     return (
